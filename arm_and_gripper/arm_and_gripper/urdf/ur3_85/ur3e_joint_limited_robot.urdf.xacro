@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="ur3e_gripper">
+
+  <xacro:arg name="transmission_hw_interface" default="hardware_interface/PositionJointInterface"/>
+  <!-- <xacro:include filename="$(find realsense2_description)/urdf/_l515.urdf.xacro" /> -->
+  
+
+  <!-- common stuff -->
+  <xacro:include filename="$(find arm_and_gripper)/urdf/ur3e_common.gazebo.xacro" />
+
+  <!-- ur3e -->
+  <xacro:include filename="$(find arm_and_gripper)/urdf/ur3e.urdf.xacro" />
+
+  <!-- phoxi -->
+  <!-- <xacro:include filename="$(find arm_and_gripper)/urdf/phoxi_camera/phoxi_camera.urdf.xacro"/>
+  <xacro:include filename="$(find arm_and_gripper)/urdf/phoxi_camera/phoxi_camera.gazebo.xacro"/>
+  <xacro:include filename="$(find arm_and_gripper)/urdf/phoxi_camera/common.xacro"/> -->
+
+  <!-- arm -->
+  <xacro:arg name="kinematics_config" default="$(find arm_and_gripper)/config/ur3_default.yaml"/>
+  <xacro:ur3e_robot prefix="" joint_limited="true"
+    shoulder_pan_lower_limit="${-pi}" shoulder_pan_upper_limit="${pi}"
+    shoulder_lift_lower_limit="${-pi}" shoulder_lift_upper_limit="${pi}"
+    elbow_joint_lower_limit="${-pi}" elbow_joint_upper_limit="${pi}"
+    wrist_1_lower_limit="${-pi}" wrist_1_upper_limit="${pi}"
+    wrist_2_lower_limit="${-pi}" wrist_2_upper_limit="${pi}"
+    wrist_3_lower_limit="${-pi}" wrist_3_upper_limit="${pi}"
+    transmission_hw_interface="$(arg transmission_hw_interface)"
+    kinematics_file="${load_yaml('$(arg kinematics_config)')}"
+  />
+
+  <link name="world" />
+
+  <joint name="world_joint" type="fixed">
+    <parent link="world" />
+    <child link = "base_link" />
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+  </joint>
+
+  <!-- <xacro:arg name="sensor_size" default="L"/>
+  <xacro:arg name="sensor_parent_frame" default="world"/>
+  <xacro:arg name="sensor_frame" default="photoneo_center"/>
+  <xacro:arg name="x" default="1.2" />
+  <xacro:arg name="y" default="0.0" />
+  <xacro:arg name="z" default="0.8" />
+  <xacro:arg name="roll" default="0.0" />
+  <xacro:arg name="pitch" default="+${M_PI/6}" />
+  <xacro:arg name="yaw" default="+${M_PI}" />
+
+  <xacro:phoxi_camera_v0 size="$(arg sensor_size)" sensor_parent_link_name="$(arg sensor_parent_frame)" sensor_link_name="$(arg sensor_frame)">
+    <origin xyz="$(arg x) $(arg y) $(arg z)" rpy="$(arg roll) $(arg pitch) $(arg yaw)" />
+  </xacro:phoxi_camera_v0>
+
+  <xacro:photoneo_gazebo sensor_link_name="$(arg sensor_frame)" size="$(arg sensor_size)"/> -->
+  
+  <!-- <xacro:sensor_l515 name="camera" topics_ns="camera" parent="base_link" use_nominal_extrinsics="true" publish_pointcloud="true" add_plug="false" use_mesh="true">
+    <origin xyz="0.6 0 0.6" rpy="0 ${pi/2} ${pi}" />
+  </xacro:sensor_l515>   -->
+
+</robot>

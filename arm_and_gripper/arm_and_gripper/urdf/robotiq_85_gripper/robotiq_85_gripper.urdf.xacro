@@ -54,11 +54,13 @@
       <visual>
         <geometry>
           <mesh filename="package://arm_and_gripper/meshes/robotiq_85_gripper/visual/robotiq_85_knuckle_link.dae"/>
+          <!-- <mesh filename="$(find arm_and_gripper)/meshes/robotiq_85_gripper/visual/robotiq_85_knuckle_link.dae"/> -->
         </geometry>
       </visual>
       <collision>
         <geometry>
           <mesh filename="package://arm_and_gripper/meshes/robotiq_85_gripper/collision/robotiq_85_knuckle_link.stl"/>
+          <!-- <mesh filename="$(find arm_and_gripper)/meshes/robotiq_85_gripper/visual/robotiq_85_knuckle_link.dae"/> -->
         </geometry>
       </collision>
       <inertial>
